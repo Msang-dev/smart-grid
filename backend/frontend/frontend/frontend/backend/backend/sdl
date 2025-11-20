@@ -1,0 +1,21 @@
+-- Create users table
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    full_name TEXT,
+    role TEXT DEFAULT 'operator',
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    last_login TIMESTAMPTZ,
+    is_active BOOLEAN DEFAULT true
+);
+
+-- Create activity log table
+CREATE TABLE user_activity (
+    id BIGSERIAL PRIMARY KEY,
+    username TEXT,
+    action TEXT,
+    description TEXT,
+    timestamp TIMESTAMPTZ DEFAULT NOW()
+);
